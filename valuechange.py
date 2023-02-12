@@ -19,19 +19,19 @@ def cb_compatible(img, val_shift):
     
         # Shifts hue to blue 
         shift_n = 180 // 2
-        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(int) + shift_n) % 181
     
     if val_shift == "g":
     
         # Shifts hue to green 
         shift_n = 90 // 2
-        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(int) + shift_n) % 181
     
     if val_shift == "r":
     
     # Shifts hue to red
         shift_n = 45 // 2
-        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(int) + shift_n) % 181
 
     # Converts file back to RGB 
     im_rgb_mod = cv2.cvtColor(im_hsv, cv2.COLOR_HSV2RGB)
