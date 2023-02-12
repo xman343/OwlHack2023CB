@@ -13,7 +13,12 @@ def color_to_cb(cb_type, im):
     out = im.convert("RGB", cb_type, None, 0,256)
     out.show()
 
-im = (Image.open('ishihara.jpg'))
+try:
+    fname = str(input("Enter the filename:"))
+except TypeError:
+    print("Invalid input, try again!")
+
+im = (Image.open(fname))
 im.show()
 
 # Convert PNG to JPEG
