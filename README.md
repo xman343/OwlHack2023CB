@@ -5,3 +5,5 @@ This program simulates protanomaly, deuteranomaly, and tritanomaly on an importe
 To run from GUI, open interface.py
 
 To run from terminal interface, open main.py
+
+Currently limited to interpreting JPG / JPEG file format.
