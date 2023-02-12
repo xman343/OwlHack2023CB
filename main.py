@@ -51,8 +51,15 @@ while program_run == True:
     try:
         convert_input = str(input("Make CB friendly? y/n"))
         if convert_input == "y":
-            mod_im = cb_compatible(im)
-            mod_im.show()
+            try: 
+                shift_input = str(input("Enter the hue shift: \nBlue     b\nRed      r\nGreen    g"))
+                if shift_input == "b" or "r" or "g":                    
+                    mod_im = cb_compatible(im, shift_input)
+                    mod_im.show()
+                else:
+                    print("Please enter a valid option.")
+            except TypeError:
+                print("Invalid input, try again!")
             try: 
                 preview_input = str(input("CB Preview of modified image? y/n"))
                 if preview_input == "y":
@@ -63,8 +70,6 @@ while program_run == True:
                 print("Not a valid input!")
         if convert_input == "n":
             continue
-        else: 
-            print("Not a valid input, try again!")
     except TypeError:
         print("Not a valid input, try again!")
         
