@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
     
     
-def cb_compatible(img):
+def cb_compatible(img, val_shift):
     im_rgb = np.array(img)
     
     # Converts to BGR scale for CV2 compatibility
@@ -15,39 +15,33 @@ def cb_compatible(img):
     # Converts to HSV for hue modification
     im_hsv = cv2.cvtColor(im_bgr, cv2.COLOR_BGR2HSV)
     
-    # Shifts hue to blue (more CB compatible)
-    shift_n = 180 // 2
-    im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+    if val_shift == "b":
     
+        # Shifts hue to blue 
+        shift_n = 180 // 2
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+    
+    if val_shift == "g":
+    
+        # Shifts hue to green 
+        shift_n = 90 // 2
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+    
+    if val_shift == "r":
+    
+    # Shifts hue to red
+        shift_n = 45 // 2
+        im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
+
     # Converts file back to RGB 
     im_rgb_mod = cv2.cvtColor(im_hsv, cv2.COLOR_HSV2RGB)
     im_rgb_mod = Image.fromarray(im_rgb_mod, 'RGB')
     return im_rgb_mod
 
-img = (Image.open("ishihara.jpg"))
+# img = (Image.open("ishihara.jpg"))
 
-new_img = cb_compatible(img)
+# val_shift = "g"
 
-new_img.show()
+# new_img = cb_compatible(img, val_shift)
 
-# # Import image
-# im_rgb = cv2.imread('ishihara.jpg')
-
-# # Convert from RGB to HSV
-# im_hsv = cv2.cvtColor(im_rgb, cv2.COLOR_BGR2HSV)
-
-# # Shift hue
-# shift_n = 180 // 2
-# im_hsv[:, :, 0] = (im_hsv[:, :, 0].astype(np.int) + shift_n) % 181
-
-# im_rgb_mod = cv2.cvtColor(im_hsv, cv2.COLOR_HSV2BGR)
-# cv2.imwrite('ishihara_mod.jpg', im_rgb_mod)
-
-# def rgb_to_hsv(img):
-#     return img.convert('HSV')
-    
-# def hsv_to_rgb(img):
-#     return img.convert('RGB')
-
-
-    
+# new_img.show()
